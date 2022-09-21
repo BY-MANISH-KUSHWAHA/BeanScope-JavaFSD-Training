@@ -3,6 +3,8 @@ package com.bean.lifecycle.config.bean;
 import com.bean.lifecycle.config.bean.mixedScope.ContentFilteringMixed;
 import com.bean.lifecycle.config.bean.mixedScope.MultiFilteringMixed;
 import com.bean.lifecycle.config.bean.prototypeScope.ContentFilteringProtoType;
+import com.bean.lifecycle.config.bean.proxyMode.ContentFilteringProxy;
+import com.bean.lifecycle.config.bean.proxyMode.Movie;
 import com.bean.lifecycle.config.bean.singletonScope.ContentFiltering;
 import com.bean.lifecycle.config.bean.singletonScope.MovieRecommenderSystem;
 import com.bean.lifecycle.config.bean.singletonScope.MultiFiltering;
@@ -40,14 +42,6 @@ public class BeanApplication {
 		System.out.println();
 
 		System.out.println("------------------------ Mixed Scope ------------------------------");
-		System.out.println(" ++++++++++++++++ ProtoType +++++++++++++++++++++++++++++++");
-		MultiFilteringMixed obj7 = appContextObj.getBean(MultiFilteringMixed.class);
-		MultiFilteringMixed obj8 = appContextObj.getBean(MultiFilteringMixed.class);
-		MultiFilteringMixed obj9 = appContextObj.getBean(MultiFilteringMixed.class);
-		System.out.println(obj7);
-		System.out.println(obj8);
-		System.out.println(obj9);
-
 
 		System.out.println(" ++++++++++++++++ Single +++++++++++++++++++++++++++++++");
 		ContentFilteringMixed obj10 = appContextObj.getBean(ContentFilteringMixed.class);
@@ -56,6 +50,44 @@ public class BeanApplication {
 		System.out.println(obj10);
 		System.out.println(obj11);
 		System.out.println(obj12);
+
+		System.out.println(" ++++++++++++++++ ProtoType +++++++++++++++++++++++++++++++");
+		MultiFilteringMixed obj7 = appContextObj.getBean(MultiFilteringMixed.class);
+		MultiFilteringMixed obj8 = appContextObj.getBean(MultiFilteringMixed.class);
+		MultiFilteringMixed obj9 = appContextObj.getBean(MultiFilteringMixed.class);
+		System.out.println(obj7);
+		System.out.println(obj8);
+		System.out.println(obj9);
+
+		System.out.println();
+
+
+		System.out.println("------------------------ Proxy Inserting Prototype Bean ------------------------------");
+		ContentFilteringProxy filter = appContextObj.getBean(ContentFilteringProxy.class);
+		System.out.println("\n Content Filter Bean with Single Scope");
+		System.out.println(filter);
+
+		// Retrive and print prototpye bean from the single bean twice
+		Movie m1 = filter.getMovie();
+		Movie m2 = filter.getMovie();
+		Movie m3 = filter.getMovie();
+
+		System.out.println("\n Movie Bean with prototype scope");
+		System.out.println(m1);
+		System.out.println(m2);
+		System.out.println(m3);
+
+		// Number of Instance
+		System.out.println("Number of Content Filter instance: "+ContentFilteringProxy.getInstance());
+		System.out.println("Number of Movie instance: "+Movie.getInstance());
+
+
+
+
+
+
+
+
 
 
 

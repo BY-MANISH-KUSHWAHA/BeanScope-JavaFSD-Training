@@ -1,7 +1,9 @@
 package com.bean.lifecycle.config.bean;
 
 import com.bean.lifecycle.config.bean.PostConstruct_PreDistroy.SpringQualifierMovieRecomandation;
-import com.bean.lifecycle.config.bean.cdiannotations.NamedCDI.CDIQualifierMovieRecomandation;
+import com.bean.lifecycle.config.bean.cdiannotations.NamedCDI_SCOPE.CDIQualifierContentFiltering;
+import com.bean.lifecycle.config.bean.cdiannotations.NamedCDI_SCOPE.CDIQualifierMovieRecomandation;
+import com.bean.lifecycle.config.bean.cdiannotations.NamedCDI_SCOPE.CDIQualifierMultiFilter;
 import com.bean.lifecycle.config.bean.lifeCyclePrototypeBeans.ContentFilterPB;
 import com.bean.lifecycle.config.bean.lifeCyclePrototypeBeans.MoviePB;
 import com.mixedScope.ContentFilteringMixed;
@@ -220,6 +222,30 @@ public class BeanApplication {
 		List<String> finalCDIQalifierResult = movieCDIQualifierRecomandation.recommandMovie("");
 		System.out.println(movieCDIQualifierRecomandation.getFilter());
 		System.out.println("Named-CDIDependencyBeanQualifierManagemnt:"+finalCDIQalifierResult);
+
+		System.out.println("++++++++++++++++++++++ CDI - Named - Inject - Singleton ++++++++++++++++++");
+		CDIQualifierContentFiltering obj20 = appContextObj.getBean(CDIQualifierContentFiltering.class);
+		CDIQualifierContentFiltering obj21 = appContextObj.getBean(CDIQualifierContentFiltering.class);
+		CDIQualifierContentFiltering obj22 = appContextObj.getBean(CDIQualifierContentFiltering.class);
+
+		System.out.println(obj20);
+		System.out.println(obj21);
+		System.out.println(obj22);
+		System.out.println();
+
+		System.out.println("++++++++++++++++++++++ CDI - Named - Inject - Prototype ++++++++++++++++++");
+		CDIQualifierMultiFilter obj30 = appContextObj.getBean(CDIQualifierMultiFilter.class);
+		CDIQualifierMultiFilter obj31 = appContextObj.getBean(CDIQualifierMultiFilter.class);
+		CDIQualifierMultiFilter obj32 = appContextObj.getBean(CDIQualifierMultiFilter.class);
+		System.out.println(obj30);
+		System.out.println(obj31);
+		System.out.println(obj32);
+		System.out.println();
+
+
+
+
+
 
 
 	}

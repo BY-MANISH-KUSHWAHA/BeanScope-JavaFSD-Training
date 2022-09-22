@@ -1,6 +1,8 @@
 package com.bean.lifecycle.config.bean;
 
 import com.bean.lifecycle.config.bean.PostConstruct_PreDistroy.SpringQualifierMovieRecomandation;
+import com.bean.lifecycle.config.bean.lifeCyclePrototypeBeans.ContentFilterPB;
+import com.bean.lifecycle.config.bean.lifeCyclePrototypeBeans.MoviePB;
 import com.mixedScope.ContentFilteringMixed;
 import com.mixedScope.MultiFilteringMixed;
 import com.bean.lifecycle.config.bean.prototypeScope.ContentFilteringProtoType;
@@ -16,7 +18,7 @@ import java.util.List;
 
 @SpringBootApplication // Without ComponentScan it only includes current and sub package in it scope
 // add outside scope package for SpringBootApplication (mixedScope out of scope)
-@ComponentScan(basePackages = {"com.bean.lifecycle.config.bean.PostConstruct_PreDistroy","com.bean.lifecycle.config.bean.singletonScope", "com.bean.lifecycle.config.bean.scopes", "com.bean.lifecycle.config.bean.proxyMode", "com.bean.lifecycle.config.bean.prototypeScope","com.mixedScope"})
+@ComponentScan(basePackages = {"com.bean.lifecycle.config.bean.lifeCyclePrototypeBeans","com.bean.lifecycle.config.bean.PostConstruct_PreDistroy","com.bean.lifecycle.config.bean.singletonScope", "com.bean.lifecycle.config.bean.scopes", "com.bean.lifecycle.config.bean.proxyMode", "com.bean.lifecycle.config.bean.prototypeScope","com.mixedScope"})
 /*
 @ComponentScan
 
@@ -52,7 +54,33 @@ UpdateEmployee ()
 Container => Method with @PreDestroy => Bean Destroyed
 
 Prototypes Scoped Beans
------------------------
+------------------------------
+Singleton => Container => Insantiates Beans => PostConstructor => All Beans get ready => PreDestroy.
+	ConnectDatabase(=> PostConstructor
+	obi1.AddEmplovee()
+	obi1.DeleteEmployee(
+	obi2.undateEmplovee
+	obi2.find Emplovee (
+	DisconnectDatabase() => PreDestroy
+
+Prototype =>Container => Instantiates Beans => Obj1 Beans Ready => Post Constructors => PreDestroy => Obj2 Beans Ready => Post Constructors => PreDestroy
+
+ConnectDatabase() => PostConstructor
+obi1.AddEmplovee()
+obit.DeleteEmplovee
+DisconnectDatabase() => PreDestrov
+
+ConnectDatabase(l=> PostConstructor
+obi2.updateEmplovee(
+obi2. findEmolovee!
+DisconnectDatabase() => PreDestrov
+
+
+CDI (Context and Dependency Injections)
+@Named
+@Inject
+@Scope
+@Singleton
  */
 public class BeanApplication {
 
@@ -135,6 +163,23 @@ public class BeanApplication {
 		System.out.println(obj9);
 
 		System.out.println();
+
+
+		System.out.println("------------------------ lifeCyclePrototypeBeans -------------------------------");
+		// Singleton Bean Execution for Construct and Pre Destroy
+		ContentFilterPB contentFilterPB = new ContentFilterPB();
+		System.out.println(contentFilterPB);
+		ContentFilterPB contentFilterPB1 = new ContentFilterPB();
+		System.out.println(contentFilterPB1);
+
+
+
+		// Prototype Based Bean Execution for Post Construct and Pre Destroy
+		MoviePB moviePB = appContextObj.getBean(MoviePB.class);
+		System.out.println(moviePB);
+
+		MoviePB moviePB1 = appContextObj.getBean(MoviePB.class);
+		System.out.println(moviePB1);
 
 	}
 

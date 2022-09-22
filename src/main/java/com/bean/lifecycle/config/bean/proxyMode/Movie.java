@@ -38,4 +38,6 @@ public class Movie {
                 "\thashCode=" + this.hashCode() +"\n"+
                 '}';
     }
+
+
 }

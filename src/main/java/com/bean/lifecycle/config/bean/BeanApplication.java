@@ -1,6 +1,7 @@
 package com.bean.lifecycle.config.bean;
 
 import com.bean.lifecycle.config.bean.PostConstruct_PreDistroy.SpringQualifierMovieRecomandation;
+import com.bean.lifecycle.config.bean.cdiannotations.NamedCDI.CDIQualifierMovieRecomandation;
 import com.bean.lifecycle.config.bean.lifeCyclePrototypeBeans.ContentFilterPB;
 import com.bean.lifecycle.config.bean.lifeCyclePrototypeBeans.MoviePB;
 import com.mixedScope.ContentFilteringMixed;
@@ -18,7 +19,7 @@ import java.util.List;
 
 @SpringBootApplication // Without ComponentScan it only includes current and sub package in it scope
 // add outside scope package for SpringBootApplication (mixedScope out of scope)
-@ComponentScan(basePackages = {"com.bean.lifecycle.config.bean.lifeCyclePrototypeBeans","com.bean.lifecycle.config.bean.PostConstruct_PreDistroy","com.bean.lifecycle.config.bean.singletonScope", "com.bean.lifecycle.config.bean.scopes", "com.bean.lifecycle.config.bean.proxyMode", "com.bean.lifecycle.config.bean.prototypeScope","com.mixedScope"})
+@ComponentScan(basePackages = {"com.bean.lifecycle.config.bean.cdiannotations","com.bean.lifecycle.config.bean.lifeCyclePrototypeBeans","com.bean.lifecycle.config.bean.PostConstruct_PreDistroy","com.bean.lifecycle.config.bean.singletonScope", "com.bean.lifecycle.config.bean.scopes", "com.bean.lifecycle.config.bean.proxyMode", "com.bean.lifecycle.config.bean.prototypeScope","com.mixedScope"})
 /*
 @ComponentScan
 
@@ -77,10 +78,39 @@ DisconnectDatabase() => PreDestrov
 
 
 CDI (Context and Dependency Injections)
+----------------------------
 @Named
 @Inject
 @Scope
 @Singleton
+
+Annotation
+----------------------------
+@Component
+@Autowired
+@Primary
+@Qualifier("")
+Named Based Choice
+@ComponentScan => Where Component will scan
+@PostConstructor
+@PreDestory
+
+Scope
+----------------------
+Singleton
+Prototype
+
+
+Dependency
+-----------------
+Field Type Injection
+Constructor Injection
+Setter Method
+
+CallBackMethod = Funx as parameter to another function call
+------------------------
+
+
  */
 public class BeanApplication {
 
@@ -180,6 +210,17 @@ public class BeanApplication {
 
 		MoviePB moviePB1 = appContextObj.getBean(MoviePB.class);
 		System.out.println(moviePB1);
+
+
+
+		System.out.println("---------- CDI (Context and Dependency Injections) by Named (Post Constructor)-------------------------");
+		// Selection based on Qualifier Value
+		// PostConstruct used as Websocket connection before start an application.
+		CDIQualifierMovieRecomandation movieCDIQualifierRecomandation = appContextObj.getBean(CDIQualifierMovieRecomandation.class);
+		List<String> finalCDIQalifierResult = movieCDIQualifierRecomandation.recommandMovie("");
+		System.out.println(movieCDIQualifierRecomandation.getFilter());
+		System.out.println("Named-CDIDependencyBeanQualifierManagemnt:"+finalCDIQalifierResult);
+
 
 	}
 

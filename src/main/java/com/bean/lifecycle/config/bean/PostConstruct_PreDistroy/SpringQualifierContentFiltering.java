@@ -1,4 +1,4 @@
-package com.bean.lifecycle.config.bean.PostConstruct;
+package com.bean.lifecycle.config.bean.PostConstruct_PreDistroy;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Primary;

@@ -1,6 +1,6 @@
 package com.bean.lifecycle.config.bean;
 
-import com.bean.lifecycle.config.bean.PostConstruct.SpringQualifierMovieRecomandation;
+import com.bean.lifecycle.config.bean.PostConstruct_PreDistroy.SpringQualifierMovieRecomandation;
 import com.mixedScope.ContentFilteringMixed;
 import com.mixedScope.MultiFilteringMixed;
 import com.bean.lifecycle.config.bean.prototypeScope.ContentFilteringProtoType;
@@ -11,13 +11,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.FilterType;
 
 import java.util.List;
 
 @SpringBootApplication // Without ComponentScan it only includes current and sub package in it scope
 // add outside scope package for SpringBootApplication (mixedScope out of scope)
-@ComponentScan(basePackages = {"com.bean.lifecycle.config.bean.PostConstruct","com.bean.lifecycle.config.bean.singletonScope", "com.bean.lifecycle.config.bean.scopes", "com.bean.lifecycle.config.bean.proxyMode", "com.bean.lifecycle.config.bean.prototypeScope","com.mixedScope"})
+@ComponentScan(basePackages = {"com.bean.lifecycle.config.bean.PostConstruct_PreDistroy","com.bean.lifecycle.config.bean.singletonScope", "com.bean.lifecycle.config.bean.scopes", "com.bean.lifecycle.config.bean.proxyMode", "com.bean.lifecycle.config.bean.prototypeScope","com.mixedScope"})
 /*
 @ComponentScan
 
@@ -35,14 +34,15 @@ import java.util.List;
 5. FilterType.CUSTOM
 
 Bean Life Cycle
-
+-----------------------------
 	Container => Bean Instantiation => Dependency Injection => Post Construct Method=> Bean is Ready
 
 Employee Management System
-
+------------------------------
 	1. Prerequisite method before running application => Connecting to Database => Establish a connection => Post Construct
 
 Lot of Methods => Adding an Employee, Update an Employee
+
 Connecto => Wait Time addEmployee (
 UndateEmploveel
 Container => Method With @PostConstructor => Bean Readv
@@ -51,7 +51,8 @@ AddEmplovee(
 UpdateEmployee ()
 Container => Method with @PreDestroy => Bean Destroyed
 
-
+Prototypes Scoped Beans
+-----------------------
  */
 public class BeanApplication {
 
@@ -81,25 +82,6 @@ public class BeanApplication {
 		System.out.println(obj6);
 		System.out.println();
 
-		System.out.println("------------------------ Mixed Scope ------------------------------");
-
-		System.out.println(" ++++++++++++++++ Single +++++++++++++++++++++++++++++++");
-		ContentFilteringMixed obj10 = appContextObj.getBean(ContentFilteringMixed.class);
-		ContentFilteringMixed obj11 = appContextObj.getBean(ContentFilteringMixed.class);
-		ContentFilteringMixed obj12 = appContextObj.getBean(ContentFilteringMixed.class);
-		System.out.println(obj10);
-		System.out.println(obj11);
-		System.out.println(obj12);
-
-		System.out.println(" ++++++++++++++++ ProtoType +++++++++++++++++++++++++++++++");
-		MultiFilteringMixed obj7 = appContextObj.getBean(MultiFilteringMixed.class);
-		MultiFilteringMixed obj8 = appContextObj.getBean(MultiFilteringMixed.class);
-		MultiFilteringMixed obj9 = appContextObj.getBean(MultiFilteringMixed.class);
-		System.out.println(obj7);
-		System.out.println(obj8);
-		System.out.println(obj9);
-
-		System.out.println();
 
 
 		System.out.println("------------------------ Proxy Inserting Prototype Bean ------------------------------");
@@ -132,6 +114,27 @@ public class BeanApplication {
 		SpringQualifierMovieRecomandation movieQualifierRecomandationSpring = appContextObj.getBean(SpringQualifierMovieRecomandation.class);
 		List<String> finalQalifierResult = movieQualifierRecomandationSpring.recommandMovie("");
 		System.out.println("SpringDependencyBeanQualifierManagemnt:"+finalQalifierResult);
+
+
+		System.out.println("------------------------ Mixed Scope ------------------------------");
+
+		System.out.println(" ++++++++++++++++ Single +++++++++++++++++++++++++++++++");
+		ContentFilteringMixed obj10 = appContextObj.getBean(ContentFilteringMixed.class);
+		ContentFilteringMixed obj11 = appContextObj.getBean(ContentFilteringMixed.class);
+		ContentFilteringMixed obj12 = appContextObj.getBean(ContentFilteringMixed.class);
+		System.out.println(obj10);
+		System.out.println(obj11);
+		System.out.println(obj12);
+
+		System.out.println(" ++++++++++++++++ ProtoType +++++++++++++++++++++++++++++++");
+		MultiFilteringMixed obj7 = appContextObj.getBean(MultiFilteringMixed.class);
+		MultiFilteringMixed obj8 = appContextObj.getBean(MultiFilteringMixed.class);
+		MultiFilteringMixed obj9 = appContextObj.getBean(MultiFilteringMixed.class);
+		System.out.println(obj7);
+		System.out.println(obj8);
+		System.out.println(obj9);
+
+		System.out.println();
 
 	}
 

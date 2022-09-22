@@ -1,4 +1,4 @@
-package com.bean.lifecycle.config.bean.PostConstruct;
+package com.bean.lifecycle.config.bean.PostConstruct_PreDistroy;
 
 import java.util.List;
 

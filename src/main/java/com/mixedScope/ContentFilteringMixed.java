@@ -1,4 +1,4 @@
-package com.bean.lifecycle.config.bean.mixedScope;
+package com.mixedScope;
 
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
@@ -8,20 +8,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-@Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
-public class MultiFilteringMixed implements Filter {
+// Default is Singleton
+@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+public class ContentFilteringMixed implements Filter {
+
+    public ContentFilteringMixed() {
+        super();
+    }
+
     @Override
     public List<String> getRecommendedMovie() {
         List<String> movies = new ArrayList<>();
-        movies.add("Back to the future");
-        movies.add("Back to the future 2");
-        movies.add("Back to the future 3");
+        movies.add("Iron Man");
+        movies.add("Iron Man 2");
+        movies.add("Iron Man 3");
         return movies;
     }
 
     @Override
     public String toString() {
-        return "MultiFilteringMixed{ hashCode:" +this.hashCode()+
+        return "ContentFilteringMixed{ hashCode:" +this.hashCode()+
                 " }";
     }
 }

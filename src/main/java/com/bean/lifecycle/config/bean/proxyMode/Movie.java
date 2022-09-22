@@ -18,7 +18,7 @@ public class Movie {
     public Movie() {
         super();
         instance++;
-        System.out.println("Movie Constructor Called");
+        System.out.println("\n Movie Constructor Called, Instance count: "+instance);
     }
 
     public static int getInstance() {
@@ -30,7 +30,12 @@ public class Movie {
         return similar;
     }
 
-
-
-
+    @Override
+    public String toString() {
+        return "Movie" +
+                "{\n" +
+                "\tinstance=" + instance +",\n"+
+                "\thashCode=" + this.hashCode() +"\n"+
+                '}';
+    }
 }

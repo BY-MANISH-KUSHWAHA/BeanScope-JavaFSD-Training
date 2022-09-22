@@ -1,4 +1,4 @@
-package com.bean.lifecycle.config.bean.mixedScope;
+package com.mixedScope;
 
 import java.util.List;
 

@@ -109,7 +109,7 @@ Field Type Injection
 Constructor Injection
 Setter Method
 
-CallBackMethod = Funx as parameter to another function call
+CallBackMethod = Function as parameter to another function call
 ------------------------
 
 
